@@ -17,10 +17,14 @@ select,
 textarea {
     color: #222;
 }
+*, html, canvas {
+  overflow: hidden !important;
+}
 
 body {
     font-size: 1em;
     line-height: 1.4;
+    overflow: hidden;
 }
 
 /*

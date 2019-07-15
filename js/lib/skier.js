@@ -290,7 +290,7 @@ if (typeof navigator !== 'undefined') {
 			}
 
 			sup.cycle();
-			
+
 			that.checkHittableObjects();
 		};
 

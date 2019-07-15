@@ -78,7 +78,7 @@
 						currentX += Math.min(that.getSpeedX(), Math.abs(currentX - that.movingToward[0]));
 					}
 				}
-				
+
 				if (typeof that.movingToward[1] !== 'undefined') {
 					if (currentY > that.movingToward[1]) {
 						currentY -= Math.min(that.getSpeedY(), Math.abs(currentY - that.movingToward[1]));
@@ -122,7 +122,7 @@
 				if (Object.isString(cx) && (cx.first() === '+' || cx.first() === '-')) incrementX(cx);
 				else that.canvasX = cx;
 			}
-			
+
 			if (cy) {
 				if (Object.isString(cy) && (cy.first() === '+' || cy.first() === '-')) incrementY(cy);
 				else that.canvasY = cy;

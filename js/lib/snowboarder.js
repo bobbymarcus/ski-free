@@ -11,7 +11,7 @@ var Sprite = require('./sprite');
 			sEast: function(xDiff) { return xDiff > 0; },
 			sWest: function(xDiff) { return xDiff <= 0; }
 		};
-		var standardSpeed = 3;
+		var standardSpeed = 20;
 
 		that.setSpeed(standardSpeed);
 

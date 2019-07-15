@@ -145,7 +145,7 @@
 	sprites.jump.hitBehaviour.skier = jumpHitsSkierBehaviour;
 
 // Really not a fan of this behaviour.
-/*	function skierHitsThickSnowBehaviour(skier, thickSnow) {
+function skierHitsThickSnowBehaviour(skier, thickSnow) {
 		// Need to implement this properly
 		skier.setSpeed(2);
 		setTimeout(function() {
@@ -159,9 +159,9 @@
 		setTimeout(function() {
 			skier.resetSpeed();
 		}, 300);
-	}*/
+	}
 
-	// sprites.thickSnow.hitBehaviour.skier = thickSnowHitsSkierBehaviour;
+		sprites.thickSnow.hitBehaviour.skier = thickSnowHitsSkierBehaviour;
 
 	function snowboarderHitsSkierBehaviour(snowboarder, skier) {
 		skier.hasHitObstacle(snowboarder);

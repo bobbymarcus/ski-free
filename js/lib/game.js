@@ -18,6 +18,7 @@ var EventedLoop = require('eventedloop');
 		this.addStaticObject = function (sprite) {
 			staticObjects.push(sprite);
 		};
+		
 
 		this.addStaticObjects = function (sprites) {
 			sprites.forEach(this.addStaticObject.bind(this));
@@ -80,7 +81,7 @@ var EventedLoop = require('eventedloop');
 			movingObjects.each(function (movingObject, i) {
 				movingObject.cycle(dContext);
 			});
-			
+
 			staticObjects.cull();
 			staticObjects.each(function (staticObject, i) {
 				if (staticObject.cycle) {
@@ -110,7 +111,7 @@ var EventedLoop = require('eventedloop');
 			movingObjects.each(function (movingObject, i) {
 				movingObject.draw(dContext);
 			});
-			
+
 			staticObjects.each(function (staticObject, i) {
 				if (staticObject.draw) {
 					staticObject.draw(dContext, 'main');

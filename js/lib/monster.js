@@ -6,7 +6,7 @@ var Sprite = require('./sprite');
 		var super_draw = that.superior('draw');
 		var spriteVersion = 1;
 		var eatingStage = 0;
-		var standardSpeed = 6;
+		var standardSpeed = 7;
 
 		that.isEating = false;
 		that.isFull = false;

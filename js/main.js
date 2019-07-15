@@ -27,14 +27,15 @@ var global = this;
 var infoBoxControls = 'Use the mouse or WASD to control the player';
 if (isMobileDevice()) infoBoxControls = 'Tap or drag on the piste to control the player';
 var sprites = require('./spriteInfo');
+var rateModifier = Math.max(800 - mainCanvas.width, 0);
 
 var pixelsPerMetre = 18;
 var distanceTravelledInMetres = 0;
-var monsterDistanceThreshold = 2000;
+var monsterDistanceThreshold = 0;
 var livesLeft = 5;
 var highScore = 0;
-var loseLifeOnObstacleHit = false;
-var dropRates = {smallTree: 4, tallTree: 2, jump: 1, thickSnow: 1, rock: 1};
+var loseLifeOnObstacleHit = true;
+var dropRates = {smallTree: 6, tallTree: 3, jump: 2, thickSnow: 2, rock: 2};
 if (localStorage.getItem('highScore')) highScore = localStorage.getItem('highScore');
 
 function loadImages (sources, next) {
@@ -107,7 +108,7 @@ function startNeverEndingGame (images) {
 		var randomPosition = dContext.getRandomMapPositionAboveViewport();
 		newMonster.setMapPosition(randomPosition[0], randomPosition[1]);
 		newMonster.follow(player);
-		newMonster.setSpeed(player.getStandardSpeed());
+		// newMonster.setSpeed(player.getStandardSpeed());
 		newMonster.onHitting(player, monsterHitsSkierBehaviour);
 
 		game.addMovingObject(newMonster, 'monster');
@@ -142,12 +143,10 @@ function startNeverEndingGame (images) {
 
 	infoBox = new InfoBox({
 		initialLines : [
-			'SkiFree.js',
 			infoBoxControls,
 			'Travelled 0m',
 			'High Score: ' + highScore,
-			'Skiers left: ' + livesLeft,
-			'Created by Dan Hough (@basicallydan)'
+			'Skiers left: ' + livesLeft
 		],
 		position: {
 			top: 15,
@@ -171,24 +170,27 @@ function startNeverEndingGame (images) {
 				},
 				player: player
 			});
+			// if (distanceTravelledInMetres > monsterDistanceThreshold) {
+			// 	spawnMonster();
+			// };
+			randomlySpawnNPC(spawnBoarder, 10);
+			randomlySpawnNPC(spawnMonster, 5);
 		}
 		if (!game.isPaused()) {
 			game.addStaticObjects(newObjects);
 
 			randomlySpawnNPC(spawnBoarder, 0.1);
 			distanceTravelledInMetres = parseFloat(player.getPixelsTravelledDownMountain() / pixelsPerMetre).toFixed(1);
-
-			if (distanceTravelledInMetres > monsterDistanceThreshold) {
-				randomlySpawnNPC(spawnMonster, 0.001);
-			}
+			//
+			// if (distanceTravelledInMetres > monsterDistanceThreshold) {
+			// 	randomlySpawnNPC(spawnMonster, 0.001);
+			// }
 
 			infoBox.setLines([
-				'SkiFree.js',
 				infoBoxControls,
 				'Travelled ' + distanceTravelledInMetres + 'm',
 				'Skiers left: ' + livesLeft,
 				'High Score: ' + highScore,
-				'Created by Dan Hough (@basicallydan)',
 				'Current Speed: ' + player.getSpeed()/*,
 				'Skier Map Position: ' + player.mapPosition[0].toFixed(1) + ', ' + player.mapPosition[1].toFixed(1),
 				'Mouse Map Position: ' + mouseMapPosition[0].toFixed(1) + ', ' + mouseMapPosition[1].toFixed(1)*/
@@ -203,7 +205,7 @@ function startNeverEndingGame (images) {
 	});
 
 	game.addUIElement(infoBox);
-	
+
 	$(mainCanvas)
 	.mousemove(function (e) {
 		game.setMouseX(e.pageX);
